@@ -2,7 +2,8 @@ include("shared.lua")
 include("client/hud.lua")
 include("client/derma.lua")
 include("client/pp.lua")
-include("client/merchant_items.lua")
+include("client/merchants.lua")
+include("client/menu.lua")
 
 hook.Add("ShouldDrawLocalPlayer", "ShouldDrawPlayer", function(ply)
 		return true
