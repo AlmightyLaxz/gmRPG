@@ -256,6 +256,43 @@ function gmRPG.items:largecola()
     return itemdata
 end
 
+function gmRPG.items:water()
+    local function useWater(ply)
+        ply:ChatPrint("You drink Water")
+        ply:EmitSound("npc/barnacle/barnacle_gulp1.wav")
+        if ply:Health() < 100 then ply:SetHealth(ply:Health() + 5) end
+        ply:addInventory("waterempty")
+    end
+    local itemdata = {
+        name = "Water",
+        price = 2,
+        merchant = "vending",
+        model = "models/props/cs_office/Water_bottle.mdl",
+        itemfunc = useWater
+    }
+    return itemdata
+end
+
+function gmRPG.items:waterempty()
+    local function useWaterEmpty(ply)
+        if ply:WaterLevel() > 0 then
+            ply:ChatPrint("You fill the bottle")
+            ply:addInventory("water")
+        else
+            ply:ChatPrint("You can't fill the bottle here!")
+            ply:addInventory("waterempty")
+        end
+    end
+    local itemdata = {
+        name = "Water (Empty)",
+        price = 2,
+        merchant = "no",
+        model = "models/props/cs_office/Water_bottle.mdl",
+        itemfunc = useWaterEmpty
+    }
+    return itemdata
+end
+
 function gmRPG.items:id()
     local function useID(ply)
     end
