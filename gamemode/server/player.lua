@@ -1,4 +1,4 @@
-util.AddNetworkString("requestInteract")
+util.AddNetworkString("rpgShowProgress")
 
 function GM:PlayerSpawn(ply)
 	ply:StripWeapons()

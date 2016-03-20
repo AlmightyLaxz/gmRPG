@@ -387,3 +387,28 @@ net.Receive("rpgATMDermaStart", function()
 		frame:Close()
 	end
 end)
+
+function displayProgress(time)
+	local startTime = CurTime()
+	local endTime = CurTime() + time
+	hook.Add("HUDPaint", "gmrpg_progress", function()
+		// taken from DarkRP, thanks falco
+		local w = ScrW()
+    	local h = ScrH() + 700
+    	local x, y, width, height = w / 2 - w / 10, h / 2 - 60, w / 5, h / 30
+    	draw.RoundedBox(8, x, y, width, height, Color(10,10,10,120))
+    	local curtime = CurTime() - startTime
+    	local time = endTime - startTime
+    	local status = math.Clamp(curtime / time, 0, 1)
+    	local BarWidth = status * (width - 16)
+    	local cornerRadius = math.Min(8, BarWidth / 3 * 2 - BarWidth / 3 * 2 % 2)
+    	draw.RoundedBox(cornerRadius, x + 8, y + 8, BarWidth, height - 16, Color(255 - (status * 255), 0 + (status * 255), 0, 100))
+	end)
+	timer.Simple(time, function()
+		hook.Remove("HUDPaint", "gmrpg_progress")
+	end)
+end
+
+net.Receive("rpgShowProgress", function()
+	displayProgress(net.ReadUInt(16))
+end)

@@ -96,6 +96,10 @@ function gmRPG.items:energydrink()
     	ply:ChatPrint("You drink an Energy Drink")
     	ply:EmitSound("npc/barnacle/barnacle_gulp1.wav")
     	ply:setEnergy(1)
+        ply:SetRunSpeed(350)
+        timer.Simple(60, function()
+            ply:SetRunSpeed(300)
+        end)
     end
     local itemdata = {
         name = "Energy Drink",
@@ -275,12 +279,22 @@ end
 
 function gmRPG.items:waterempty()
     local function useWaterEmpty(ply)
-        if ply:WaterLevel() > 0 then
-            ply:ChatPrint("You fill the bottle")
-            ply:addInventory("water")
-        else
+        if ply:WaterLevel() == 0 then
             ply:ChatPrint("You can't fill the bottle here!")
             ply:addInventory("waterempty")
+        else
+            net.Start("rpgShowProgress")
+                net.WriteUInt(3, 16)
+            net.Send(ply)
+            timer.Simple(3, function()
+                if ply:WaterLevel() > 0 then
+                    ply:ChatPrint("You fill the bottle")
+                    ply:addInventory("water")
+                else
+                    ply:ChatPrint("You can't fill the bottle here!")
+                    ply:addInventory("waterempty")
+                end
+            end)
         end
     end
     local itemdata = {
