@@ -9,8 +9,11 @@
 - Inventory system
 - Gambling
 - ATMs
+- Object Placement
 
 ## Planned Features:
 - NPC Missions
 - Item Storage
 - Gun fights
+- More objects to place
+- Building rental
