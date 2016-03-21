@@ -12,6 +12,7 @@ net.Receive("requestUse", function(len, ply)
 
     if ply:removeItem(item) then
         requestedItem.itemfunc(ply)
+        ply.couldBePlacing = item
      else
         ply:ChatPrint("Item does not exist in inventory.")
     end

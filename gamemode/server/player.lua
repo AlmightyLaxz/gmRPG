@@ -24,3 +24,9 @@ function GM:PlayerDeath(victim, inflictor, attacker)
 	net.Start("rpgUndrunkify")
 	net.Send(victim)
 end
+
+function GM:PlayerDisconnected(ply)
+	for _,v in pairs(ply.ents) do
+		v:Remove()
+	end
+end

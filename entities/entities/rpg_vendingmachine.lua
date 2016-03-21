@@ -20,7 +20,7 @@ local merchantid   = "vending"
 if SERVER then
     function ENT:Initialize( )
     	self:SetModel("models/props_interiors/VendingMachineSoda01a.mdl")
-    	self:SetSolid(SOLID_BBOX)
+    	self:SetSolid(SOLID_VPHYSICS)
     	self:SetUseType(SIMPLE_USE)
     	self:DropToFloor()
     end

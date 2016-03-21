@@ -8,6 +8,7 @@ AddCSLuaFile("client/derma/dialogue.lua")
 AddCSLuaFile("client/derma/merchants.lua")
 AddCSLuaFile("client/derma/inventory.lua")
 AddCSLuaFile("client/pp.lua")
+AddCSLuaFile("client/building.lua")
 AddCSLuaFile("shared/items.lua")
 
 include("shared.lua")
@@ -15,6 +16,7 @@ include("server/pdata.lua")
 include("server/player.lua")
 include("server/npc_handling.lua")
 include("server/merchant_items.lua")
+include("server/map_ents.lua")
 include("shared/items.lua")
 
 util.AddNetworkString("rpgDrunkify")
@@ -25,6 +27,8 @@ function GM:PlayerInitialSpawn(ply)
 	ply:sendStats()
 	ply:updateInventory()
 	ply:updateBankMoney()
+	ply.entCount = 0
+	ply.ents = {}
 end
 
 function GM:PlayerSpray(ply)

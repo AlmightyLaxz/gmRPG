@@ -7,8 +7,8 @@ include("client/derma/dialogue.lua")
 include("client/derma/merchants.lua")
 include("client/derma/inventory.lua")
 include("client/pp.lua")
+include("client/building.lua")
 include("shared/items.lua")
-
 
 hook.Add("ShouldDrawLocalPlayer", "ShouldDrawPlayer", function(ply)
 		return true
@@ -87,16 +87,22 @@ end
 /////////////////////////////////////////*/
 
 hook.Add("InitPostEntity", "rpgAddRoof", function()
-	roofTable = {}
-	for k,v in pairs(ents.GetAll()) do
-		if v:GetClass() == "func_brush" then
-			v:SetRenderMode(RENDERMODE_TRANSALPHA)
-			table.insert(roofTable, v)
-		end
-	end
+	net.Start("rpgRequestRoofTable")
+	net.SendToServer()
+	net.Start("rpgRequestZoneTable")
+	net.SendToServer()
+end)
+
+net.Receive("rpgRoofTable", function()
+	roofTable = net.ReadTable()
+end)
+
+net.Receive("rpgZoneTable", function()
+	zoneTable = net.ReadTable()
 end)
 
 hook.Add("Think", "rpgRoofAlpha", function()
+	if roofTable == nil then return false end
 	for _,v in pairs(roofTable) do
 		local trans = 0
 		v:SetRenderMode(RENDERMODE_TRANSALPHA)

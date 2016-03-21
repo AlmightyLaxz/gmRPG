@@ -307,6 +307,36 @@ function gmRPG.items:waterempty()
     return itemdata
 end
 
+function gmRPG.items:vendingmachine()
+    local function useVendingMachine(ply)
+        ply:SendLua('placeObject("models/props_interiors/VendingMachineSoda01a.mdl", Vector(0, 0, 0), "vendingmachine")')
+    end
+    local itemdata = {
+        name = "Vending Machine",
+        price = 500,
+        merchant = "",
+        model = "models/props_interiors/VendingMachineSoda01a.mdl",
+        itemfunc = useVendingMachine,
+        ent = "rpg_vendingmachine"
+    }
+    return itemdata
+end
+
+function gmRPG.items:bed()
+    local function useBed(ply)
+        ply:SendLua('placeObject("models/props/de_inferno/bed.mdl", Vector(0, 0, -60), "bed")')
+    end
+    local itemdata = {
+        name = "Bed",
+        price = 500,
+        merchant = "",
+        model = "models/props/de_inferno/bed.mdl",
+        itemfunc = useBed,
+        ent = "rpg_bed"
+    }
+    return itemdata
+end
+
 function gmRPG.items:id()
     local function useID(ply)
     end
