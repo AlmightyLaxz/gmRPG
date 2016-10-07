@@ -1,4 +1,4 @@
-# gmRPG
+![alt text](https://github.com/AlmightyLaxz/gmRPG/blob/master/logo.png?raw=true "gmRPG")
 
 ## Current Features:
 - NPC Employers
@@ -16,4 +16,4 @@
 - Item Storage
 - Gun fights
 - More objects to place
-- Building rental
+- ~~Building rental~~
