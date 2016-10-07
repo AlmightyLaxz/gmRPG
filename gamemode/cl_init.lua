@@ -113,3 +113,15 @@ hook.Add("Think", "rpgRoofAlpha", function()
 		v:SetColor(Color(255, 255, 255, newAlpha))
 	end
 end)
+
+/*/////////////////////////////////////////
+            		+attack
+/////////////////////////////////////////*/
+
+hook.Add("Think", "gmrpg_mouseattack", function() 
+	if input.IsMouseDown(MOUSE_LEFT) && allowAttack then
+		RunConsoleCommand("+attack")
+	else
+		RunConsoleCommand("-attack")
+	end
+end)

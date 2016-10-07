@@ -1,4 +1,5 @@
 util.AddNetworkString("rpgShowProgress")
+util.AddNetworkString("RequestPVP")
 
 function GM:PlayerSpawn(ply)
 	ply:StripWeapons()
@@ -15,6 +16,10 @@ function GM:PlayerSpawn(ply)
 
 	ply.coffeeDrank = 0
 	ply.caffeine = 0
+
+	ply.pvp = false
+
+	ply:SetTeam(TEAM_STANDARD)
 end
 
 function GM:PlayerDeath(victim, inflictor, attacker)
@@ -30,3 +35,18 @@ function GM:PlayerDisconnected(ply)
 		v:Remove()
 	end
 end
+
+function GM:EntityTakeDamage(target, dmg)
+	if !target:IsPlayer() then
+		return false
+	elseif target.pvp && dmg:GetAttacker().pvp then
+		return false
+	else
+		return true
+	end
+end
+
+net.Receive("RequestPVP", function(len, ply)
+	ply.pvp = true
+	ply:SetTeam(TEAM_PVP)
+end)

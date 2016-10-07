@@ -229,6 +229,15 @@ function displayCharacterMenu()
 	icon:SetCamPos( headpos-Vector( -200, 0, 0 ) )
 	function icon:LayoutEntity( Entity ) return end
 
+	local pvpButton = vgui.Create("DButton", frame)
+	pvpButton:SetPos(200, 400)
+	pvpButton:SetText("Allow PVP until death")
+	pvpButton:SetSize(120, 30)
+	pvpButton.DoClick = function()
+		net.Start("RequestPVP")
+		net.SendToServer()
+	end
+
 	local closeButton = vgui.Create( "DButton", frame )
 	closeButton:SetPos( 200, 550 )
 	closeButton:SetText( "Close" )
@@ -275,6 +284,7 @@ function displayControls()
 			rpgZoomOut()
 		end
 	end
+
 	local charMenu = vgui.Create( "DButton", camFrame )
 	charMenu:SetPos(105, 50)
 	charMenu:SetText( "Char Menu" )
@@ -282,6 +292,18 @@ function displayControls()
 	charMenu.DoClick = function()
 		if !charUIVisible then
 			displayCharacterMenu()
+		end
+	end
+
+	local attackMode = vgui.Create("DButton", camFrame)
+	attackMode:SetPos(105, 10)
+	attackMode:SetText("Attack Mode")
+	attackMode:SetSize(90, 40)
+	attackMode.DoClick = function()
+		if !allowAttack then
+			allowAttack = true
+		else
+			allowAttack = false
 		end
 	end
 end
