@@ -301,7 +301,7 @@ function gmRPG.items:waterempty()
     local itemdata = {
         name = "Water (Empty)",
         price = 2,
-        merchant = "no",
+        merchant = "",
         model = "models/props/cs_office/Water_bottle.mdl",
         itemfunc = useWaterEmpty
     }
