@@ -16,7 +16,7 @@ function displayInventory()
 	invFrame:ShowCloseButton(false)
 	invFrame:MakePopup()
 	invFrame:SetKeyBoardInputEnabled(false)
-	invFrame:SetMouseInputEnabled(false)
+	invFrame:SetMouseInputEnabled(true)
 	invFrame.Paint = function( self, w, h )
 		draw.RoundedBox( 0, 0, 0, w, h, Color( 0, 0, 0, 150 ) )
 	end

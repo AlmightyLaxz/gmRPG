@@ -49,6 +49,7 @@ function gmRPG.items:strongbeer()
     }
     return itemdata
 end
+
 function gmRPG.items:caffeine()
     local function useCaffeinePills(ply)
     	ply:ChatPrint("You swallow Caffeine Pills")
@@ -303,6 +304,48 @@ function gmRPG.items:waterempty()
         merchant = "no",
         model = "models/props/cs_office/Water_bottle.mdl",
         itemfunc = useWaterEmpty
+    }
+    return itemdata
+end
+
+function gmRPG.items:axe()
+    local function useAxe(ply)
+        ply:Give("weapon_gmrpg_axe")
+    end
+    local itemdata = {
+        name = "Axe",
+        price = 90,
+        merchant = "hardware",
+        model = "models/props/CS_militia/axe.mdl",
+        itemfunc = useAxe
+    }
+    return itemdata
+end
+
+function gmRPG.items:wood()
+    local function useWood(ply)
+        ply:addInventory("wood")
+    end
+    local itemdata = {
+        name = "Wood",
+        price = 10,
+        merchant = "",
+        model = "models/props/de_prodigy/wood_pallet_debris_07.mdl",
+        itemfunc = useWood
+    }
+    return itemdata
+end
+
+function gmRPG.items:rock()
+    local function useRock(ply)
+        ply:addInventory("rock")
+    end
+    local itemdata = {
+        name = "Rock",
+        price = 10,
+        merchant = "",
+        model = "models/props_junk/rock001a.mdl",
+        itemfunc = useRock
     }
     return itemdata
 end

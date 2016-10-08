@@ -8,6 +8,7 @@ include("client/derma/merchants.lua")
 include("client/derma/inventory.lua")
 include("client/pp.lua")
 include("client/building.lua")
+include("client/cleandecals.lua")
 include("shared/items.lua")
 
 hook.Add("ShouldDrawLocalPlayer", "ShouldDrawPlayer", function(ply)

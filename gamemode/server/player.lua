@@ -20,6 +20,9 @@ function GM:PlayerSpawn(ply)
 	ply.pvp = false
 
 	ply:SetTeam(TEAM_STANDARD)
+
+	ply:Give("weapon_gmrpg_unarmed")
+	ply:Give("weapon_fists")
 end
 
 function GM:PlayerDeath(victim, inflictor, attacker)
@@ -49,4 +52,5 @@ end
 net.Receive("RequestPVP", function(len, ply)
 	ply.pvp = true
 	ply:SetTeam(TEAM_PVP)
+	ply:ChatPrint("PVP Enabled until death")
 end)
