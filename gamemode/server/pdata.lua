@@ -169,3 +169,58 @@ net.Receive("rpgRequestBankMoney", function(len, ply)
         net.WriteString(tostring(ply:getBankMoney()))
     net.Send(ply)
 end)
+
+/*/////////////////////////////////////////
+                Storage
+/////////////////////////////////////////*/
+util.AddNetworkString("rpgRequestStorage")
+util.AddNetworkString("rpgSendStorage")
+
+function meta:getStorage()
+    return util.JSONToTable(self:GetPData("gmrpg_storage"))
+end
+
+function meta:addStorage(item)
+    local newInv = self:getStorage()
+    if newInv == nil then
+        newInv = {}
+    end
+    if #newInv >= 6 then
+        self:ChatPrint("Your storage is full.")
+        return false
+    else
+        table.insert(newInv, item)
+        self:SetPData("gmrpg_storage", util.TableToJSON(newInv))
+        self:updateStorage()
+        return true
+    end
+end
+
+function meta:resetStorage()
+    self:SetPData("gmrpg_storage", util.TableToJSON({}))
+    self:updateStorage()
+end
+
+function meta:removeStorage(item)
+    local inv = self:getStorage()
+
+    local remove = table.RemoveByValue(inv, item)
+    if remove != false then
+        self:SetPData("gmrpg_storage", util.TableToJSON(inv))
+        self:updateStorage()
+        return true
+    end
+    return false
+end
+
+function meta:updateStorage()
+    net.Start("rpgSendStorage")
+        net.WriteString(util.TableToJSON(self:getStorage()))
+    net.Send(self)
+end
+
+net.Receive("rpgRequestStorage", function(len, ply)
+    net.Start("rpgSendStorage")
+        net.WriteString(util.TableToJSON(ply:getStorage()))
+    net.Send(ply)
+end)

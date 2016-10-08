@@ -30,8 +30,8 @@ end
 
 function ENT:OnTakeDamage(dmg)
 	local ply = dmg:GetAttacker()
-	local amm = 0
 	if ply:GetActiveWeapon():GetClass() == "weapon_gmrpg_axe" then
 		ply:addInventory("rock")
+	end
 	end
 end

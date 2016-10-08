@@ -13,12 +13,11 @@ ENT.Category        = "gmRPG"
 ENT.Spawnable       = true
 
 ENT.randText        = {}
-ENT.randText[0]     = "You can destroy items in your inventory by right clicking and pressing destroy."
-ENT.randText[1]     = "Drunk too much caffeine? Go to sleep so it wears off."
-ENT.randText[2]     = "You can enter PVP mode through the character menu."
-ENT.randText[3]     = "Not enough energy? You can get more energy by training at the gym."
-ENT.randText[4]     = "You can reset your zoom level with the left arrow key."
-ENT.randText[5]     = "Water bottles can be refilled when standing in water sources."
+ENT.randText[0]     = "Hello, what's up?"
+ENT.randText[1]     = "Can I help you?"
+ENT.randText[2]     = "Do I know you?"
+ENT.randText[3]     = "Do you need something?"
+ENT.randText[4]     = "What do you want?"
 
 ENT.civModels       = {}
 ENT.civModels[0]    = "models/humans/group01/female_01.mdl"
@@ -37,7 +36,7 @@ ENT.civModels[12]   = "models/humans/group01/male_07.mdl"
 ENT.civModels[13]   = "models/humans/group01/male_08.mdl"
 ENT.civModels[14]   = "models/humans/group01/male_09.mdl"
 
-ENT.titleText       = "Helpful Civilian"
+ENT.titleText       = "Civilian"
 
 if SERVER then
     function ENT:Initialize()
@@ -57,11 +56,11 @@ if SERVER then
     		Activator.cantUse = true
             net.Start("rpgSingleDialogueDermaStart")
                 net.WriteString(self.titleText)
-                net.WriteString(self.randText[math.random(0, #self.randText)])
+                net.WriteString(self.randText[math.random(0, 4)])
                 net.WriteString("Close")
                 net.WriteEntity(self)
             net.Send(Activator)
-    		timer.Simple(0.01, function()
+    		timer.Simple(1, function()
     			Activator.cantUse = false
     		end)
     	end

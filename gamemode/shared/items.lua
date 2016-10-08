@@ -316,8 +316,54 @@ function gmRPG.items:axe()
         name = "Axe",
         price = 90,
         merchant = "hardware",
+        sellableto = "hardware_b",
         model = "models/props/CS_militia/axe.mdl",
         itemfunc = useAxe
+    }
+    return itemdata
+end
+
+function gmRPG.items:pot()
+    local function usePot(ply)
+        ply:Give("weapon_gmrpg_pot")
+    end
+    local itemdata = {
+        name = "Pot",
+        price = 20,
+        merchant = "supermarket",
+        sellableto = "hardware_b",
+        model = "models/props_interiors/pot02a.mdl",
+        itemfunc = usePot
+    }
+    return itemdata
+end
+
+function gmRPG.items:frypan()
+    local function useFrypan(ply)
+        ply:Give("weapon_gmrpg_frypan")
+    end
+    local itemdata = {
+        name = "Frypan",
+        price = 20,
+        merchant = "supermarket",
+        sellableto = "hardware_b",
+        model = "models/props_c17/metalPot002a.mdl",
+        itemfunc = useFrypan
+    }
+    return itemdata
+end
+
+function gmRPG.items:pipe()
+    local function usePipe(ply)
+        ply:Give("weapon_gmrpg_pipe")
+    end
+    local itemdata = {
+        name = "Pipe",
+        price = 10,
+        merchant = "hardware",
+        sellableto = "hardware_b",
+        model = "models/props_canal/mattpipe.mdl",
+        itemfunc = usePipe
     }
     return itemdata
 end
@@ -330,6 +376,7 @@ function gmRPG.items:wood()
         name = "Wood",
         price = 10,
         merchant = "",
+        sellableto = "hardware_b",
         model = "models/props/de_prodigy/wood_pallet_debris_07.mdl",
         itemfunc = useWood
     }
@@ -344,8 +391,94 @@ function gmRPG.items:rock()
         name = "Rock",
         price = 10,
         merchant = "",
+        sellableto = "hardware_b",
         model = "models/props_junk/rock001a.mdl",
         itemfunc = useRock
+    }
+    return itemdata
+end
+
+function gmRPG.items:revolver()
+    local function useRevolver(ply)
+        ply:Give("weapon_357")
+    end
+    local itemdata = {
+        name = "Revolver",
+        price = 400,
+        merchant = "armsdealer",
+        model = "models/weapons/w_357.mdl",
+        itemfunc = useRevolver
+    }
+    return itemdata
+end
+
+function gmRPG.items:revolverammo()
+    local function useRevolverammo(ply)
+        ply:GiveAmmo(6, "357", false)
+    end
+    local itemdata = {
+        name = "Revolver Ammo",
+        price = 50,
+        merchant = "armsdealer",
+        model = "models/Items/357ammo.mdl",
+        itemfunc = useRevolverammo
+    }
+    return itemdata
+end
+
+function gmRPG.items:smg()
+    local function useSmg(ply)
+        ply:Give("weapon_smg1")
+    end
+    local itemdata = {
+        name = "SMG",
+        price = 600,
+        merchant = "armsdealer",
+        model = "models/weapons/w_smg1.mdl",
+        itemfunc = useSmg
+    }
+    return itemdata
+end
+
+function gmRPG.items:smgammo()
+    local function useSmgammo(ply)
+        ply:GiveAmmo(30, "SMG1", false)
+    end
+    local itemdata = {
+        name = "SMG Ammo",
+        price = 60,
+        merchant = "armsdealer",
+        model = "models/Items/BoxMRounds.mdl",
+        itemfunc = useSmgammo
+    }
+    return itemdata
+end
+
+function gmRPG.items:armour()
+    local function useArmour(ply)
+        ply:SetArmor(100)
+        ply:EmitSound("items/gunpickup2.wav", 100, 100)
+    end
+    local itemdata = {
+        name = "Armour",
+        price = 300,
+        merchant = "armsdealer",
+        model = "models/props_c17/SuitCase001a.mdl",
+        itemfunc = useArmour
+    }
+    return itemdata
+end
+
+function gmRPG.items:camera()
+    local function useCamera(ply)
+        ply:Give("weapon_gmrpg_camera")
+    end
+    local itemdata = {
+        name = "Camera",
+        price = 150,
+        merchant = "",
+        model = "models/MaxOfS2D/camera.mdl",
+        itemfunc = useCamera
     }
     return itemdata
 end
@@ -380,6 +513,7 @@ function gmRPG.items:bed()
     return itemdata
 end
 
+// not in use
 function gmRPG.items:id()
     local function useID(ply)
     end

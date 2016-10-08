@@ -273,6 +273,11 @@ function displayControls()
 		if zoomIn:IsDown() then
 			rpgZoomIn()
 		end
+		if !useCamera then
+			camFrame:SetMouseInputEnabled(false)
+		else
+			camFrame:SetMouseInputEnabled(true)
+		end
 	end
 
 	local zoomOut = vgui.Create( "DButton", camFrame )

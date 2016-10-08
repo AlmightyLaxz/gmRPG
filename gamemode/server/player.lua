@@ -1,6 +1,10 @@
 util.AddNetworkString("rpgShowProgress")
 util.AddNetworkString("RequestPVP")
 
+function GM:PlayerInitialSpawn(ply)
+	ply:resetInventory()
+end
+
 function GM:PlayerSpawn(ply)
 	ply:StripWeapons()
 	ply:SetHealth(100)
@@ -18,6 +22,8 @@ function GM:PlayerSpawn(ply)
 	ply.caffeine = 0
 
 	ply.pvp = false
+
+	ply.ents = {}
 
 	ply:SetTeam(TEAM_STANDARD)
 
@@ -44,6 +50,13 @@ function GM:EntityTakeDamage(target, dmg)
 		return false
 	elseif target.pvp && dmg:GetAttacker().pvp then
 		return false
+	elseif dmg:GetAttacker():IsPlayer() && target:IsPlayer() then
+		if !dmg:GetAttacker().pvp then
+			dmg:GetAttacker():ChatPrint("You are not in PVP mode")
+		elseif !target.pvp then
+			dmg:GetAttacker():ChatPrint("This person is not in PVP mode")
+			return false
+		end
 	else
 		return true
 	end

@@ -68,6 +68,7 @@ net.Receive("rpgRequestPlaceObject", function(len, ply)
 	if !IsValid(ent) then return end
 	ent:SetPos(pos)
 	ent:SetAngles(rot)
+	ent:SetOwner(ply)
 	ent:Spawn()
 	table.insert(ply.ents, ent)
 	ply.entCount = ply.entCount + 1

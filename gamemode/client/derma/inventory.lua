@@ -16,9 +16,16 @@ function displayInventory()
 	invFrame:ShowCloseButton(false)
 	invFrame:MakePopup()
 	invFrame:SetKeyBoardInputEnabled(false)
-	invFrame:SetMouseInputEnabled(true)
+	invFrame:SetMouseInputEnabled(false)
 	invFrame.Paint = function( self, w, h )
 		draw.RoundedBox( 0, 0, 0, w, h, Color( 0, 0, 0, 150 ) )
+	end
+	invFrame.Think = function()
+		if !useCamera then
+			invFrame:SetMouseInputEnabled(false)
+		else
+			invFrame:SetMouseInputEnabled(true)
+		end
 	end
 
 	invlist = vgui.Create("DIconLayout", invFrame)
