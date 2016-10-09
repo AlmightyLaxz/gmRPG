@@ -17,7 +17,7 @@ if SERVER then
 		self:PhysicsInit(SOLID_VPHYSICS)
 		self:SetSolid(SOLID_VPHYSICS)
 		self:SetUseType(SIMPLE_USE)
-		self:DrawShadow(false)
+		self:DrawShadow(true)
 		self:SetHealth(1)
 		self.Physgunnable = false
 	
