@@ -53,6 +53,7 @@ net.Receive("rpgMerchantDermaStart", function()
 		item.DoClick = function()
 			net.Start("requestPurchase")
 				net.WriteString(k)
+				net.WriteEntity(npcEnt)
 			net.SendToServer()
 		end
 

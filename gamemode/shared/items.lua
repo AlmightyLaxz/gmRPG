@@ -15,6 +15,15 @@ function gmRPG.items:beer()
     		net.Send(ply)
     		ply.isDrunk = false
     	end)
+        timer.Simple(1, function()
+            local bottle = ents.Create("prop_physics")
+            bottle:SetModel("models/props_junk/garbage_glassbottle003a.mdl")
+            bottle:SetPos(ply:EyePos() + (ply:GetAimVector() * 24 + Vector(0,20,0)))
+            bottle:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+            bottle:Spawn()
+            local phys = bottle:GetPhysicsObject()
+            phys:ApplyForceCenter(ply:GetAimVector() * 300)
+        end)
     end
 	local itemdata = {
 		name = "Beer",
@@ -39,6 +48,19 @@ function gmRPG.items:strongbeer()
     		net.Send(ply)
     		ply.isDrunk = false
     	end)
+        timer.Simple(1, function()
+            local bottle = ents.Create("prop_physics")
+            bottle:SetModel("models/props_junk/garbage_glassbottle001a.mdl")
+            bottle:SetPos(ply:EyePos() + (ply:GetAimVector() * 24 + Vector(0,20,0)))
+            bottle:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+            bottle:Spawn()
+            local phys = bottle:GetPhysicsObject()
+            phys:ApplyForceCenter(ply:GetAimVector() * 300)
+            timer.Simple(3, function()
+                if IsValid(bottle) then bottle:Remove() end
+                if IsValid(phys) then phys:Remove() end
+            end)
+        end)
     end
     local itemdata = {
         name = "Strong Beer",

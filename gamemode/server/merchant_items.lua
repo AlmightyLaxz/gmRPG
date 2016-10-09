@@ -23,7 +23,23 @@ end)
 net.Receive("requestPurchase", function(len, ply)
     if !IsValid(ply) then return false end
     local item = net.ReadString()
+    local npcEnt = net.ReadEntity()
     local requestedItem = gmRPG.items[item]()
+
+    if requestedItem == nil then
+        ply:ChatPrint("This item doesn't exist.")
+        return false
+    end
+
+    if npcEnt == nil then
+        ply:ChatPrint("This NPC doesn't exist.")
+        return false
+    end
+
+    if ply:GetPos():Distance(npcEnt:GetPos()) > 100 then
+        ply:ChatPrint("Too far away from the NPC!")
+        return false
+    end
 
     if tonumber(ply:getMoney()) < requestedItem.price then
         ply:ChatPrint("You don't have enough money for that.")

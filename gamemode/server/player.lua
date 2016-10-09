@@ -53,9 +53,10 @@ function GM:EntityTakeDamage(target, dmg)
 	elseif dmg:GetAttacker():IsPlayer() && target:IsPlayer() then
 		if !dmg:GetAttacker().pvp then
 			dmg:GetAttacker():ChatPrint("You are not in PVP mode")
+			return true
 		elseif !target.pvp then
 			dmg:GetAttacker():ChatPrint("This person is not in PVP mode")
-			return false
+			return true
 		end
 	else
 		return true
