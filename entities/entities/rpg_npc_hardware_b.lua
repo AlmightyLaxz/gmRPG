@@ -19,7 +19,7 @@ local merchantid   = "hardware_b"
 
 if SERVER then
     function ENT:Initialize()
-    	self:SetModel("models/monk.mdl")
+    	self:SetModel("models/Humans/Group02/Male_02.mdl")
     	self:SetHullType( HULL_HUMAN )
     	self:SetHullSizeNormal( )
     	self:SetNPCState( NPC_STATE_SCRIPT )
