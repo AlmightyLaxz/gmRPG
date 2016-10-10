@@ -44,17 +44,18 @@ end
 
 hook.Add("InitPostEntity", "rpgAddBuildingZones", function()
 	zoneTable = {}
-	for k,v in pairs(ents.GetAll()) do
-		if v:GetClass() == "trigger_proximity" then
-			table.insert(zoneTable, v)
-		end
-	end
+	net.Start("rpgRequestZoneTable")
+	net.SendToServer()
 end)
 
-hook.Add("Think", "rpgZoneTest", function()
+net.Receive("rpgZoneTable", function()
+	zoneTable = net.ReadTable()
+end)
+
+/*hook.Add("Think", "rpgZoneTest", function()
 	for _,v in pairs(zoneTable) do
 		local ply = LocalPlayer()
 		local min, max = v:WorldSpaceAABB()
 		local plyInBox = ply:GetPos():WithinAABox(min, max)
 	end
-end)
+end)*/ // Broken currently?
