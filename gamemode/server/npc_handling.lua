@@ -18,6 +18,8 @@ util.AddNetworkString("requestSlots")
 util.AddNetworkString("requestDeposit")
 util.AddNetworkString("requestWithdraw")
 util.AddNetworkString("requestMission")
+util.AddNetworkString("requestStore")
+util.AddNetworkString("requestFromStorage")
 
 util.AddNetworkString("rpgEmploymentResultDermaStart")
 
@@ -229,6 +231,20 @@ end)
 net.Receive("requestMisison", function(len, ply)
     local npcEnt = net.ReadEntity()
     if !IsValid(ply) || !IsValid(npcEnt) then return false end
+end)
+
+net.Receive("requestStore", function(len, ply)
+    local item = net.ReadString()
+    if ply:addStorage(item) then
+        ply:ChatPrint("Put " .. item .. " in storage")
+    end
+end)
+
+net.Receive("requestFromStorage", function(len, ply)
+    local item = net.ReadString()
+    if ply:removeStorage(item) then
+        ply:ChatPrint("Took " .. item .. " out of storage")
+    end
 end)
 
 timer.Create("rpgBankInterest", 60, 0, function()

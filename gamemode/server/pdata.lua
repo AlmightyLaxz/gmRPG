@@ -76,7 +76,9 @@ util.AddNetworkString("rpgRequestInventory")
 util.AddNetworkString("rpgSendInventory")
 
 function meta:getInventory()
-    return util.JSONToTable(self:GetPData("gmrpg_inventory"))
+    local inv = util.JSONToTable(self:GetPData("gmrpg_inventory"))
+    if inv == nil then inv = {} end
+    return inv
 end
 
 function meta:addInventory(item)
@@ -177,11 +179,23 @@ util.AddNetworkString("rpgRequestStorage")
 util.AddNetworkString("rpgSendStorage")
 
 function meta:getStorage()
-    return util.JSONToTable(self:GetPData("gmrpg_storage"))
+    local storage = util.JSONToTable(self:GetPData("gmrpg_storage"))
+    if storage == nil then storage = {} end
+    return storage
 end
 
 function meta:addStorage(item)
     local newInv = self:getStorage()
+    local itemExists = false
+
+    for k,v in pairs(self:getInventory()) do
+        if v == item then
+            itemExists = true 
+        end
+    end
+
+    if !itemExists then return false end
+
     if newInv == nil then
         newInv = {}
     end
@@ -190,6 +204,7 @@ function meta:addStorage(item)
         return false
     else
         table.insert(newInv, item)
+        self:removeItem(item)
         self:SetPData("gmrpg_storage", util.TableToJSON(newInv))
         self:updateStorage()
         return true
@@ -203,10 +218,19 @@ end
 
 function meta:removeStorage(item)
     local inv = self:getStorage()
+    local itemExists = false
+
+    for k,v in pairs(inv) do
+        if v == item then
+            itemExists = true
+        end
+    end
 
     local remove = table.RemoveByValue(inv, item)
-    if remove != false then
+
+    if remove != false && itemExists then
         self:SetPData("gmrpg_storage", util.TableToJSON(inv))
+        self:addInventory(item)
         self:updateStorage()
         return true
     end

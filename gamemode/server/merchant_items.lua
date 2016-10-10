@@ -5,6 +5,7 @@ util.AddNetworkString("requestSell")
 util.AddNetworkString("requestDestruction")
 util.AddNetworkString("rpgMerchantDermaStart")
 util.AddNetworkString("rpgSellDermaStart")
+util.AddNetworkString("rpgStorageDermaStart")
 util.AddNetworkString("rpgInspectDermaStart")
 
 net.Receive("requestUse", function(len, ply)
