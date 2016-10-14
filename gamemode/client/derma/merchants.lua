@@ -152,6 +152,8 @@ net.Receive("rpgStorageDermaStart", function()
 	local merchantid = net.ReadString()
 	local npcEnt  = net.ReadEntity()
 
+	requestStorage()
+
 	if !IsValid(npcEnt) then return false end
 
 	local frame = vgui.Create( "DFrame" )
